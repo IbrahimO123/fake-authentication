@@ -5,7 +5,7 @@
       <v-container>
         <v-responsive class="mx-auto" max-width="344">
           <v-text-field
-            v-model.trim="emailLogin"
+            v-model.trim="email"
             type="email"
             label="E-mail"
             class="bg-deep-purple-lighten-5 my-2 rounded-sm"
@@ -58,7 +58,6 @@ export default {
   },
   mounted() {
     this.$store.commit("setDisplayButton", false);
-    this.$store.commit("setEmail", "");
     this.$store.commit("setPassword", "");
     setTimeout(async () => {
       const user = await this.getuserDetails();
@@ -95,7 +94,7 @@ export default {
       const res = await this.getuserDetails();
       if (res === null) return;
       if (
-        res.email !== this.emailLogin ||
+        res.email !== this.$store.state.user.email ||
         res.password !== this.passwordLogin
       ) {
         this.$store.state.error = "Invalid email or password";
@@ -107,7 +106,6 @@ export default {
         this.$store.state.user.firstname &&
         this.$store.state.user.lastname
       ) {
-        this.$store.commit("setEmail", this.emailLogin);
         this.$store.commit("setPassword", this.passwordLogin);
         setTimeout(() => this.$router.replace("/products"));
         return;
