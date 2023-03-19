@@ -12,7 +12,7 @@
           <template v-slot:text
             ><div>
               <div>{{ product.description.substring(0, 30) }} ...</div>
-              <div class="text-body-1">
+              <div class="text-body-2">
                 <span
                   >Price: {{ product.price }}</span
                 >
