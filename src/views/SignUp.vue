@@ -137,6 +137,9 @@ export default {
         return this.$store.state.displayButton;
       },
     },
+    error() {
+      return this.$store.state.error;
+    },
   },
 };
 </script>
