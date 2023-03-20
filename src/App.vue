@@ -46,6 +46,13 @@
                 ></v-list-item>
               </router-link>
             </template>
+             <router-link to="/notfound">
+                <v-list-item
+                  prepend-icon="mdi-cancel"
+                  title="404 Page"
+                  value="notfound"
+                ></v-list-item
+              ></router-link>
           </template>
         </v-navigation-drawer>
       </v-responsive>
