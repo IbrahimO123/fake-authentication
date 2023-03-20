@@ -13,7 +13,7 @@
             required
           ></v-text-field>
           <v-text-field
-            v-model.trim="passwordLogin"
+            v-model.trim="loginPassword"
             label="Password"
             type="password"
             color="black"
@@ -52,16 +52,15 @@ export default {
   data() {
     return {
       showPassword: false,
-      emailLogin: "",
-      passwordLogin: "",
     };
   },
   mounted() {
     this.$store.commit("setDisplayButton", false);
     this.$store.commit("setPassword", "");
+    this.$store.commit("setLoginPassword", "");
     setTimeout(async () => {
       const user = await this.getuserDetails();
-      if (user === null) return this.$router.push("/sign-up");
+      if (user === null) return;
       else {
         this.$store.commit("setEmail", user.email);
         this.$store.commit("setPassword", user.password);
@@ -77,12 +76,13 @@ export default {
         setTimeout(() => {
           const data = localStorage.getItem("user");
           if (data === null) {
-            this.$store.state.error = "You don't have an account, sign up";
-            setTimeout(() => this.$router.push("/sign-up"), 1000);
+            resolve(null);
+            return;
+          } else {
+            const user = JSON.parse(data);
+            resolve(user);
             return;
           }
-          const user = JSON.parse(data);
-          resolve(user);
         });
       });
     },
@@ -92,10 +92,13 @@ export default {
       await this.$store.dispatch("asyncCheckEmail");
       if (this.$store.state.error) return;
       const res = await this.getuserDetails();
-      if (res === null) return;
+      if (res === null) {
+        this.$store.state.error = "You don't have an account, sign up";
+        return;
+      }
       if (
         res.email !== this.$store.state.user.email ||
-        res.password !== this.passwordLogin
+        res.password !== this.$store.state.loginPassword
       ) {
         this.$store.state.error = "Invalid email or password";
         return;
@@ -106,7 +109,7 @@ export default {
         this.$store.state.user.firstname &&
         this.$store.state.user.lastname
       ) {
-        this.$store.commit("setPassword", this.passwordLogin);
+        this.$store.commit("setPassword", this.$store.state.loginPassword);
         setTimeout(() => this.$router.replace("/products"));
         return;
       }
@@ -119,6 +122,14 @@ export default {
       },
       set(value) {
         return this.$store.commit("setEmail", value);
+      },
+    },
+    loginPassword: {
+      get() {
+        return this.$store.state.loginPassword;
+      },
+      set(value) {
+        return this.$store.commit("setLoginPassword", value);
       },
     },
     password: {
