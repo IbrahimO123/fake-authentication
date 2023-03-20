@@ -51,8 +51,7 @@ export default createStore({
       ) {
         state.error = "Please fill all fields";
         return state.error;
-      }
-      return (state.error = "");
+      } else return (state.error = "");
     },
     checkFieldFillLogin(state) {
       if (state.user.email === "" || state.loginPassword === "") {
@@ -113,9 +112,10 @@ export default createStore({
       state.user.firstname = "";
       state.user.lastname = "";
       state.user.email = "";
+      state.loginPassword = "";
       state.user.password = "";
       state.user.confirmPassword = "";
-      return setTimeout(() => router.replace("/login"), 2000);
+      return setTimeout(() => router.replace("/login"), 1500);
     },
   },
   actions: {
@@ -124,7 +124,7 @@ export default createStore({
         setTimeout(() => {
           commit("checkFieldFill");
           resolve();
-        }, 1000);
+        });
       });
     },
     asyncCheckFieldFillLogin({ commit }) {
@@ -132,7 +132,7 @@ export default createStore({
         setTimeout(() => {
           commit("checkFieldFillLogin");
           resolve();
-        }, 1000);
+        });
       });
     },
     asyncCheckEmail({ commit }) {
