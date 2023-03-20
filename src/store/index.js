@@ -7,6 +7,7 @@ export default createStore({
     snackbar: false,
     success: "",
     displayButton: false,
+    loginPassword: "",
     user: {
       firstname: "",
       lastname: "",
@@ -24,6 +25,9 @@ export default createStore({
     },
     setEmail(state, payload) {
       state.user.email = payload;
+    },
+    setLoginPassword(state, payload) {
+      state.loginPassword = payload;
     },
     setPassword(state, payload) {
       state.user.password = payload;
@@ -51,11 +55,13 @@ export default createStore({
       return (state.error = "");
     },
     checkFieldFillLogin(state) {
-      if (state.user.email === "" || state.user.password === "") {
+      if (state.user.email === "" || state.loginPassword === "") {
         state.error = "Please fill all fields";
         return state.error;
+      } else {
+        state.error = "";
+        return;
       }
-      return (state.error = "");
     },
     checkEmail(state) {
       if (state.user.email.includes("@") && state.user.email.includes("."))
