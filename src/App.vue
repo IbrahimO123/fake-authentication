@@ -3,7 +3,9 @@
     <v-main class="bg-deep-purple-darken-1 text-deep-purple-lighten-5">
       <v-responsive class="mx-auto" max-width="100px">
         <v-navigation-drawer
-          permanent
+          v-model="drawer"
+          left
+          :permanent="mdAndUp"
           class="bg-deep-purple-lighten-5 text-white pa-3"
         >
           <v-list density="compact">
@@ -47,6 +49,23 @@
           </template>
         </v-navigation-drawer>
       </v-responsive>
+      <v-toolbar color="white" right>
+        <v-app-bar-nav-icon
+          class="hidden-md-and-up"
+          @click.stop="drawer = !drawer"
+        ></v-app-bar-nav-icon>
+
+        <v-list density="compact">
+          <router-link to="/">
+            <v-list-item
+            class="body-1"
+              prepend-icon="mdi-two-factor-authentication"
+              title="AUTHENTICATION"
+              value="authentication"
+            ></v-list-item>
+          </router-link>
+        </v-list>
+      </v-toolbar>
       <router-view />
       <v-snackbar v-model="snackbar" :timeout="1500" color="success">
         {{ success }}
@@ -57,8 +76,18 @@
 </template>
 
 <script>
+import { useDisplay } from "vuetify";
 export default {
   name: "App",
+  data() {
+    return {
+      drawer: null,
+    };
+  },
+  setup() {
+    const { mdAndUp } = useDisplay();
+    return { mdAndUp };
+  },
   computed: {
     firstname: {
       get() {
@@ -115,5 +144,10 @@ a {
 
 .form {
   width: 35%;
+}
+@media (max-width: 768px) {
+  .form {
+    width: 85%;
+  }
 }
 </style>
