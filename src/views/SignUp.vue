@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="mt-7">
     <h3>Sign Up</h3>
     <v-form v-on:submit.prevent="signUpForm" class="form">
       <v-container>
@@ -68,6 +68,16 @@
         ></small
       >
     </p>
+    <!-- <v-container>
+      <p>
+        <small>
+          Use Google for Signing up
+          <v-btn class="bg-deep-orange-lighten-1" prepend-icon="mdi-google"
+            >Google</v-btn
+          >
+        </small>
+      </p>
+    </v-container> -->
   </main>
 </template>
 
@@ -150,7 +160,6 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
 }
 h4 {
   color: #fff;
