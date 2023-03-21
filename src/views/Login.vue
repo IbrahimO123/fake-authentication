@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="mt-16">
     <h3>Login</h3>
     <v-form class="form" v-on:submit.prevent="handleLogin">
       <v-container>
@@ -158,7 +158,6 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
 }
 h4 {
   color: #fff;
