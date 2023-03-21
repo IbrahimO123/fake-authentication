@@ -150,9 +150,15 @@ a {
 }
 
 .form {
-  width: 35%;
+  width: 30%;
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .form {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
   .form {
     width: 85%;
   }
