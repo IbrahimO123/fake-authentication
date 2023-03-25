@@ -46,13 +46,13 @@
                 ></v-list-item>
               </router-link>
             </template>
-             <router-link to="/notfound">
-                <v-list-item
-                  prepend-icon="mdi-cancel"
-                  title="404 Page"
-                  value="notfound"
-                ></v-list-item
-              ></router-link>
+            <router-link to="/notfound">
+              <v-list-item
+                prepend-icon="mdi-cancel"
+                title="404 Page"
+                value="notfound"
+              ></v-list-item
+            ></router-link>
           </template>
         </v-navigation-drawer>
       </v-responsive>
@@ -65,7 +65,7 @@
         <v-list density="compact">
           <router-link to="/">
             <v-list-item
-            class="body-1"
+              class="body-1"
               prepend-icon="mdi-two-factor-authentication"
               title="AUTHENTICATION"
               value="authentication"
@@ -74,7 +74,13 @@
         </v-list>
       </v-toolbar>
       <router-view />
-      <v-snackbar v-model="snackbar" :timeout="1500" color="success">
+      <v-snackbar
+        v-model="snackbar"
+        :location="status ? 'bottom' : 'top'"
+        :timeout="1500"
+        max-width="50px"
+        :color="color ? 'blue-grey-lighten-4' : 'success'"
+      >
         {{ success }}
         <template v-slot:actions> </template>
       </v-snackbar>
@@ -93,7 +99,8 @@ export default {
   },
   setup() {
     const { mdAndUp } = useDisplay();
-    return { mdAndUp };
+
+    return { mdAndUp, status: mdAndUp.value };
   },
   computed: {
     firstname: {
@@ -130,6 +137,13 @@ export default {
     success() {
       return this.$store.state.success;
     },
+    status() {
+      const { mdAndUp } = useDisplay();
+      return mdAndUp.value;
+    },
+    color() {
+      return this.$store.state.color;
+    }
   },
   methods: {
     async logUserOut() {
