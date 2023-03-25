@@ -6,6 +6,7 @@ export default createStore({
     error: "",
     snackbar: false,
     success: "",
+    color: null,
     displayButton: false,
     loginPassword: "",
     user: {
@@ -40,6 +41,9 @@ export default createStore({
     },
     setDisplayButton(state, payload) {
       state.displayButton = payload;
+    },
+    setColor(state, payload) {
+      state.color = payload;
     },
     checkFieldFill(state) {
       if (
@@ -89,6 +93,7 @@ export default createStore({
       };
       localStorage.setItem("user", JSON.stringify(user));
       state.error = "";
+      state.color = null;
       state.snackbar = true;
       state.success = "Sign up successful";
       return setTimeout(() => router.replace("/login"), 2000);
@@ -107,6 +112,7 @@ export default createStore({
     },
     LogOut(state) {
       state.error = "";
+      state.color = null;
       state.snackbar = true;
       state.success = "Logout successful";
       state.user.firstname = "";
@@ -117,6 +123,12 @@ export default createStore({
       state.user.confirmPassword = "";
       return setTimeout(() => router.replace("/login"), 1500);
     },
+    NotAvailable(state) {
+      state.snackbar = true;
+      state.success = "Not yet available for use";
+      state.color = "not available";
+      return;
+    }
   },
   actions: {
     asyncCheckFieldFill({ commit }) {
