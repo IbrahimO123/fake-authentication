@@ -68,20 +68,26 @@
         ></small
       >
     </p>
-    <!-- <v-container>
+    <v-container>
       <p>
         <small>
-          Use Google for Signing up
-          <v-btn class="bg-deep-orange-lighten-1" prepend-icon="mdi-google"
+          Use Google for signing up
+          <v-btn
+            variant="flat"
+            @click="handleGoogleSignInMethod"
+            class="bg-blue-grey-lighten-4 text-grey px-2 rounded"
+            prepend-icon="mdi-google"
             >Google</v-btn
           >
         </small>
       </p>
-    </v-container> -->
+    </v-container>
   </main>
 </template>
 
 <script>
+import handleGoogleSignIn from "@/components/utility/SignInWithGoogle";
+
 export default {
   name: "SignUp",
   mounted() {
@@ -91,6 +97,12 @@ export default {
     this.$store.state.error = "";
   },
   methods: {
+    async handleGoogleSignInMethod() {
+      //const res = await handleGoogleSignIn();
+      //console.log(res)
+      this.$store.commit("NotAvailable");
+      return;
+    },
     async signUpForm() {
       await this.$store.dispatch("asyncCheckFieldFill");
       if (this.$store.state.error) return;
