@@ -76,6 +76,11 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           const data = localStorage.getItem("user");
+          if (JSON.parse(data) && date > JSON.parse(data).expiry) {
+            localStorage.removeItem("user");
+            resolve(null);
+            return;
+          }
           if (data === null) {
             resolve(null);
             return;
