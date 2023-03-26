@@ -1,41 +1,47 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import SignUp from '../views/SignUp.vue'
-import Products from '../views/Products.vue'
-import NotFoundPage from '../views/NotFoundPage.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "../views/Home.vue";
+import Login from "../views/Login.vue";
+import SignUp from "../views/SignUp.vue";
+import Products from "../views/Products.vue";
+import NotFoundPage from "../views/NotFoundPage.vue";
+import UserProducts from "../views/UserProducts.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: Home
+    path: "/",
+    name: "home",
+    component: Home,
   },
   {
-    path: '/login',
-    name: 'login',
-    component: Login
+    path: "/login",
+    name: "login",
+    component: Login,
   },
   {
-    path: '/sign-up',
-    name: 'signup',
-    component: SignUp
+    path: "/sign-up",
+    name: "signup",
+    component: SignUp,
   },
   {
-    path: '/products',
-    name: 'products',
-    component: Products
+    path: "/products",
+    name: "products",
+    component: Products,
   },
   {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFpundPage',
-    component: NotFoundPage
-  }
-]
+    path: "/:pathMatch(.*)*",
+    name: "NotFpundPage",
+    component: NotFoundPage,
+  },
+  {
+    path: "/user-products",
+    name: "UserProducts",
+    component: UserProducts,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
