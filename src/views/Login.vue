@@ -73,7 +73,6 @@ export default {
   methods: {
     getUserDetails() {
       const date = new Date().getTime();
-      console.log(date);
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           const data = localStorage.getItem("user");
