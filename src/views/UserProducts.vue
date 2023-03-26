@@ -4,7 +4,17 @@
       <div>
         <span
           >{{ this.$store.state.user.firstname || "User" }} Products
-          <p><small>Checkout Now</small></p>
+          <p>
+            <router-link to="/products">
+              <v-btn
+                class="text-deep-purple-darken-1 bg-deep-purple-lighten-5"
+                block
+                append-icon="mdi-truck-check-outline"
+              >
+                Checkout Now
+              </v-btn>
+            </router-link>
+          </p>
         </span>
         <div class="under">
           <h3>Under development</h3>
@@ -42,7 +52,7 @@ export default {
 <style scoped>
 .under {
   margin-top: 10rem;
-  color:rgb(114, 106, 106);
+  color: rgb(114, 106, 106);
   display: grid;
   place-items: center;
   text-align: center;
