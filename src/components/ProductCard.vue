@@ -18,6 +18,11 @@
               </div>
             </div>
           </template>
+          <template v-slot:actions>
+            <v-btn color="text-deep-purple-darken-1 bg-deep-purple-lighten-5" append-icon="mdi-plus" ><small>Add</small></v-btn>
+            <v-btn color="primary" ><small>View</small></v-btn>
+            <v-btn color="primary" ><small>Buy Now</small></v-btn>
+          </template>
         </v-card>
       </v-col>
     </v-row>
