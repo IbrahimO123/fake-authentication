@@ -77,7 +77,7 @@ export default createStore({
         return (state.error = "Password does not match");
       }
       if (state.user.password.length < 5) {
-        return (state.error = "Password length must be more 5 characters");
+        return (state.error = "Password length must be 5 or more characters");
       } else if (state.user.password.length > 10) {
         return (state.error = "Password length must not be 10 characters");
       }
