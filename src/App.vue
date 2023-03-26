@@ -72,6 +72,17 @@
             ></v-list-item>
           </router-link>
         </v-list>
+        <template v-slot:append>
+          <template v-if="email && firstname && lastname && displayButton">
+            <router-link to="/user-products">
+              <v-list-item
+                :title="status ? 'Cart' : null"
+                value="cart"
+                prepend-icon="mdi-cart-variant"
+              ></v-list-item>
+            </router-link>
+          </template>
+        </template>
       </v-toolbar>
       <router-view />
       <v-snackbar
@@ -143,7 +154,7 @@ export default {
     },
     color() {
       return this.$store.state.color;
-    }
+    },
   },
   methods: {
     async logUserOut() {
