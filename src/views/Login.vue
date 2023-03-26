@@ -59,7 +59,7 @@ export default {
     this.$store.commit("setPassword", "");
     this.$store.commit("setLoginPassword", "");
     setTimeout(async () => {
-      const user = await this.getuserDetails();
+      const user = await this.getUserDetails();
       if (user === null) return;
       else {
         this.$store.commit("setEmail", user.email);
@@ -71,7 +71,9 @@ export default {
     }, 1000);
   },
   methods: {
-    getuserDetails() {
+    getUserDetails() {
+      const date = new Date().getTime();
+      console.log(date);
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           const data = localStorage.getItem("user");
@@ -91,7 +93,7 @@ export default {
       if (this.$store.state.error) return;
       await this.$store.dispatch("asyncCheckEmail");
       if (this.$store.state.error) return;
-      const res = await this.getuserDetails();
+      const res = await this.getUserDetails();
       if (res === null) {
         this.$store.state.error = "You don't have an account, sign up";
         return;
