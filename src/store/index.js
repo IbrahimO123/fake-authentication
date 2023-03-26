@@ -76,10 +76,10 @@ export default createStore({
       if (state.user.password !== state.user.confirmPassword) {
         return (state.error = "Password does not match");
       }
-      if (state.user.password.length < 5) {
-        return (state.error = "Password length must be 5 or more characters");
+      if (state.user.password.length <= 5) {
+        return (state.error = "Password must be more than 5 characters");
       } else if (state.user.password.length > 10) {
-        return (state.error = "Password length must not be 10 characters");
+        return (state.error = "Password must not be 10 characters");
       }
       return (state.error = "");
     },
@@ -89,7 +89,7 @@ export default createStore({
         lastname: state.user.lastname,
         email: state.user.email,
         password: state.user.password,
-        expiry: new Date().getTime() || 0,
+        expiry: new Date().getTime() + 259200000,
       };
       localStorage.setItem("user", JSON.stringify(user));
       state.error = "";
@@ -98,15 +98,17 @@ export default createStore({
       state.success = "Sign up successful";
       return setTimeout(() => router.replace("/login"), 2000);
     },
-    getDetails() {
+    getUserDetails(state) {
       const date = new Date().getTime();
       if (
         JSON.parse(localStorage.getItem("user")) &&
         date > JSON.parse(localStorage.getItem("user")).expiry
       ) {
+        state.error = "Session expired, please sign up again";
         localStorage.removeItem("user");
         return false;
       } else {
+        state.error = "";
         return JSON.parse(localStorage.getItem("user"));
       }
     },
@@ -128,7 +130,7 @@ export default createStore({
       state.success = "Not yet available for use";
       state.color = "not available";
       return;
-    }
+    },
   },
   actions: {
     asyncCheckFieldFill({ commit }) {
@@ -174,7 +176,7 @@ export default createStore({
     asyncGetDetails({ commit }) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          commit("getDetails");
+          commit("getUserDetails");
           resolve();
         });
       });
