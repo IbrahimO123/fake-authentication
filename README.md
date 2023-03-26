@@ -19,4 +19,5 @@
 - https://fake-authenticationz.vercel.app/
 
 ### Conclusions
-A great way to better understand authentication and proper implementation of vuex and how to mutate the state store in vuex, sharing of state information between components 
+A great way to better understand authentication and proper implementation of vuex and how to mutate the state store in vuex, sharing of state information between components,
+ As time progresses, I hope to implement more features and easier login or signup functionality
