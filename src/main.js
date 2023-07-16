@@ -1,11 +1,11 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 // import vuetify from './plugins/vuetify'
-import { loadFonts } from './plugins/webfontloader'
+import { loadFonts } from "./plugins/webfontloader";
 
-loadFonts()
+loadFonts();
 
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
@@ -26,8 +26,4 @@ const vuetify = createVuetify({
   },
 });
 
-createApp(App)
-  .use(router)
-  .use(store)
-  .use(vuetify)
-  .mount('#app')
+createApp(App).use(router).use(store).use(vuetify).mount("#app");
