@@ -15,10 +15,11 @@
           <v-text-field
             v-model.trim="loginPassword"
             label="Password"
-            type="password"
             color="black"
             class="bg-deep-purple-lighten-5 my-2 rounded-sm"
-            append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show ? 'text' : 'password'"
+            :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="show = !show"
             required
           >
           </v-text-field>
@@ -51,7 +52,7 @@ export default {
   name: "Login",
   data() {
     return {
-      showPassword: false,
+      show: false,
     };
   },
   mounted() {
