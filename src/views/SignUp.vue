@@ -30,20 +30,22 @@
         <v-text-field
           v-model.trim="password"
           label="Password"
-          type="password"
           color="black"
           class="bg-deep-purple-lighten-5 my-2 rounded-sm"
           required
-          append-inner-icon="mdi-eye"
+          :type="show ? 'text' : 'password'"
+          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="show = !show"
         >
         </v-text-field>
 
         <v-text-field
           v-model.trim="confirmPassword"
           label="Confirm Password"
-          type="password"
           color="black"
-          append-inner-icon="mdi-eye"
+          :type="show ? 'text' : 'password'"
+          :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="show = !show"
           required
           class="bg-deep-purple-lighten-5 my-2 rounded-sm"
         >
@@ -90,6 +92,11 @@ import handleGoogleSignIn from "@/components/utility/SignInWithGoogle";
 
 export default {
   name: "SignUp",
+  data () {
+    return {
+      show: false,
+    }
+  },
   mounted() {
     this.$store.commit("setDisplayButton", false);
     this.$store.commit("setPassword", "");
@@ -97,6 +104,14 @@ export default {
     this.$store.state.error = "";
   },
   methods: {
+    showPassword() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    },
     async handleGoogleSignInMethod() {
       //const res = await handleGoogleSignIn();
       //console.log(res)
